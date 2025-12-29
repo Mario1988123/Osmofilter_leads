@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osmofilter CRM Leads</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <h1>🔍 Osmofilter CRM Leads</h1>
+                <div class="header-stats">
+                    <div class="stat-card">
+                        <span class="stat-number" id="totalCompanies">0</span>
+                        <span class="stat-label">Empresas</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="pendingCompanies">0</span>
+                        <span class="stat-label">Pendientes</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="myClients">0</span>
+                        <span class="stat-label">Mis Clientes</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="empresas">📋 Empresas</button>
+            <button class="tab-btn" data-tab="productos">🛠️ Productos</button>
+            <button class="tab-btn" data-tab="keywords">🔍 Palabras Clave</button>
+            <button class="tab-btn" data-tab="dudas">❓ En Duda</button>
+        </nav>
+
+        <!-- Tab: Empresas Captadas -->
+        <div class="tab-content active" id="empresas">
+            <div class="section-header">
+                <h2>Empresas Captadas</h2>
+                <div class="filters">
+                    <select id="filterStatus">
+                        <option value="all">Todos los estados</option>
+                        <option value="pending">⏳ Pendiente</option>
+                        <option value="captured">✅ Captado</option>
+                        <option value="my-client">👤 Mi Cliente</option>
+                        <option value="colleague-client">👥 Cliente Compañero</option>
+                        <option value="in-progress">🔄 En Proceso</option>
+                    </select>
+                    <select id="filterProduct">
+                        <option value="all">Todos los productos</option>
+                    </select>
+                    <input type="text" id="searchCompany" placeholder="Buscar empresa...">
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table id="companiesTable">
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Web</th>
+                            <th>Productos Detectados</th>
+                            <th>Estado</th>
+                            <th>Encontrado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="companiesBody">
+                        <!-- Se llenará dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Productos -->
+        <div class="tab-content" id="productos">
+            <div class="section-header">
+                <h2>Productos Detectados</h2>
+                <button class="btn-primary" id="addProductBtn">+ Añadir Producto</button>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Se llenará dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Tab: Palabras Clave -->
+        <div class="tab-content" id="keywords">
+            <div class="section-header">
+                <h2>Palabras Clave de Búsqueda</h2>
+                <button class="btn-primary" id="addKeywordBtn">+ Añadir Palabra Clave</button>
+            </div>
+            
+            <div class="keywords-container">
+                <div class="keywords-list" id="keywordsList">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: En Duda -->
+        <div class="tab-content" id="dudas">
+            <div class="section-header">
+                <h2>Páginas en Duda</h2>
+                <p class="subtitle">Empresas que necesitan revisión manual</p>
+            </div>
+            
+            <div class="doubts-container" id="doubtsContainer">
+                <!-- Se llenará dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar empresa -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Empresa</h2>
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                
+                <label>Nombre de la Empresa:</label>
+                <input type="text" id="editName" required>
+                
+                <label>Sitio Web:</label>
+                <input type="url" id="editUrl" required>
+                
+                <label>Estado:</label>
+                <select id="editStatus">
+                    <option value="pending">⏳ Pendiente de revisar</option>
+                    <option value="captured">✅ Captado</option>
+                    <option value="my-client">👤 Mi Cliente</option>
+                    <option value="colleague-client">👥 Cliente de Compañero</option>
+                    <option value="in-progress">🔄 En Proceso</option>
+                </select>
+                
+                <label>Productos (separados por coma):</label>
+                <input type="text" id="editProducts" placeholder="osmosis inversa, descalcificador, etc.">
+                
+                <label>Notas:</label>
+                <textarea id="editNotes" rows="3"></textarea>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Guardar</button>
+                    <button type="button" class="btn-secondary" id="cancelEdit">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para añadir palabra clave -->
+    <div id="keywordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Añadir Palabra Clave</h2>
+            <form id="keywordForm">
+                <label>Palabra o Frase Clave:</label>
+                <input type="text" id="newKeyword" required placeholder="Ej: osmosis inversa">
+                
+                <label>Categoría (opcional):</label>
+                <select id="keywordCategory">
+                    <option value="general">General</option>
+                    <option value="producto">Producto</option>
+                    <option value="competencia">Competencia</option>
+                    <option value="servicio">Servicio</option>
+                </select>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Añadir</button>
+                    <button type="button" class="btn-secondary" id="cancelKeyword">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para añadir producto -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Añadir Producto</h2>
+            <form id="productForm">
+                <label>Nombre del Producto:</label>
+                <input type="text" id="newProduct" required placeholder="Ej: Descalcificador FC-1300">
+                
+                <label>Categoría:</label>
+                <select id="productCategory">
+                    <option value="osmosis">Osmosis Inversa</option>
+                    <option value="descalcificador">Descalcificador</option>
+                    <option value="purificador">Purificador</option>
+                    <option value="dispensador">Dispensador</option>
+                    <option value="fuente">Fuente de Agua</option>
+                    <option value="otro">Otro</option>
+                </select>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Añadir</button>
+                    <button type="button" class="btn-secondary" id="cancelProduct">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
