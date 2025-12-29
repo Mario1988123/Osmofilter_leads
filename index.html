@@ -3,165 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osmofilter CRM Leads</title>
+    <title>Osmofilter CRM Leads V2.0</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <header>
+        <!-- Header con estadísticas animadas -->
+        <header class="header-gradient">
             <div class="header-content">
-                <h1>🔍 Osmofilter CRM Leads</h1>
+                <h1><i class="fas fa-water"></i> Osmofilter CRM Leads <span class="version">V2.0</span></h1>
                 <div class="header-stats">
-                    <div class="stat-card">
-                        <span class="stat-number" id="totalCompanies">0</span>
-                        <span class="stat-label">Empresas</span>
+                    <div class="stat-card stat-total">
+                        <i class="fas fa-building"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalCompanies">0</span>
+                            <span class="stat-label">Total</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <span class="stat-number" id="pendingCompanies">0</span>
-                        <span class="stat-label">Pendientes</span>
+                    <div class="stat-card stat-pending">
+                        <i class="fas fa-clock"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="pendingCompanies">0</span>
+                            <span class="stat-label">Pendientes</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <span class="stat-number" id="myClients">0</span>
-                        <span class="stat-label">Mis Clientes</span>
+                    <div class="stat-card stat-mine">
+                        <i class="fas fa-user-check"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="myClients">0</span>
+                            <span class="stat-label">Mis Clientes</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-colleague">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="colleagueClients">0</span>
+                            <span class="stat-label">Compañeros</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- Navigation Tabs -->
-        <nav class="tabs">
-            <button class="tab-btn active" data-tab="empresas">📋 Empresas</button>
-            <button class="tab-btn" data-tab="productos">🛠️ Productos</button>
-            <button class="tab-btn" data-tab="keywords">🔍 Palabras Clave</button>
-            <button class="tab-btn" data-tab="dudas">❓ En Duda</button>
+        <!-- Tabs renovados -->
+        <nav class="tabs-modern">
+            <button class="tab-btn active" data-tab="pendientes">
+                <i class="fas fa-inbox"></i> Pendientes
+            </button>
+            <button class="tab-btn" data-tab="mis-clientes">
+                <i class="fas fa-star"></i> Mis Clientes
+            </button>
+            <button class="tab-btn" data-tab="compañeros">
+                <i class="fas fa-user-friends"></i> Compañeros
+            </button>
+            <button class="tab-btn" data-tab="en-proceso">
+                <i class="fas fa-spinner"></i> En Proceso
+            </button>
+            <button class="tab-btn" data-tab="captados">
+                <i class="fas fa-check-circle"></i> Captados
+            </button>
+            <button class="tab-btn" data-tab="keywords">
+                <i class="fas fa-key"></i> Keywords
+            </button>
+            <button class="tab-btn" data-tab="buscar-imagen">
+                <i class="fas fa-camera"></i> Buscar por Imagen
+            </button>
         </nav>
 
-        <!-- Tab: Empresas Captadas -->
-        <div class="tab-content active" id="empresas">
+        <!-- Tab: Pendientes -->
+        <div class="tab-content active" id="pendientes">
             <div class="section-header">
-                <h2>Empresas Captadas</h2>
+                <h2><i class="fas fa-inbox"></i> Empresas Pendientes de Revisar</h2>
                 <div class="filters">
-                    <select id="filterStatus">
-                        <option value="all">Todos los estados</option>
-                        <option value="pending">⏳ Pendiente</option>
-                        <option value="captured">✅ Captado</option>
-                        <option value="my-client">👤 Mi Cliente</option>
-                        <option value="colleague-client">👥 Cliente Compañero</option>
-                        <option value="in-progress">🔄 En Proceso</option>
-                    </select>
-                    <select id="filterProduct">
-                        <option value="all">Todos los productos</option>
-                    </select>
-                    <input type="text" id="searchCompany" placeholder="Buscar empresa...">
+                    <input type="text" id="searchPending" placeholder="🔍 Buscar..." class="search-input">
                 </div>
             </div>
-            
-            <div class="table-container">
-                <table id="companiesTable">
-                    <thead>
-                        <tr>
-                            <th>Empresa</th>
-                            <th>Web</th>
-                            <th>Productos Detectados</th>
-                            <th>Estado</th>
-                            <th>Encontrado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="companiesBody">
-                        <!-- Se llenará dinámicamente -->
-                    </tbody>
-                </table>
-            </div>
+            <div class="companies-grid" id="pendingGrid"></div>
         </div>
 
-        <!-- Tab: Productos -->
-        <div class="tab-content" id="productos">
+        <!-- Tab: Mis Clientes -->
+        <div class="tab-content" id="mis-clientes">
             <div class="section-header">
-                <h2>Productos Detectados</h2>
-                <button class="btn-primary" id="addProductBtn">+ Añadir Producto</button>
+                <h2><i class="fas fa-star"></i> Mis Clientes</h2>
+                <div class="filters">
+                    <input type="text" id="searchMyClients" placeholder="🔍 Buscar..." class="search-input">
+                </div>
             </div>
-            
-            <div class="products-grid" id="productsGrid">
-                <!-- Se llenará dinámicamente -->
-            </div>
+            <div class="companies-grid" id="myClientsGrid"></div>
         </div>
 
-        <!-- Tab: Palabras Clave -->
+        <!-- Tab: Compañeros -->
+        <div class="tab-content" id="compañeros">
+            <div class="section-header">
+                <h2><i class="fas fa-user-friends"></i> Clientes de Compañeros</h2>
+                <div class="filters">
+                    <input type="text" id="searchColleague" placeholder="🔍 Buscar..." class="search-input">
+                </div>
+            </div>
+            <div class="companies-grid" id="colleagueGrid"></div>
+        </div>
+
+        <!-- Tab: En Proceso -->
+        <div class="tab-content" id="en-proceso">
+            <div class="section-header">
+                <h2><i class="fas fa-spinner"></i> En Proceso de Captación</h2>
+                <div class="filters">
+                    <input type="text" id="searchInProgress" placeholder="🔍 Buscar..." class="search-input">
+                </div>
+            </div>
+            <div class="companies-grid" id="inProgressGrid"></div>
+        </div>
+
+        <!-- Tab: Captados -->
+        <div class="tab-content" id="captados">
+            <div class="section-header">
+                <h2><i class="fas fa-check-circle"></i> Empresas Captadas</h2>
+                <div class="filters">
+                    <input type="text" id="searchCaptured" placeholder="🔍 Buscar..." class="search-input">
+                </div>
+            </div>
+            <div class="companies-grid" id="capturedGrid"></div>
+        </div>
+
+        <!-- Tab: Keywords -->
         <div class="tab-content" id="keywords">
             <div class="section-header">
-                <h2>Palabras Clave de Búsqueda</h2>
-                <button class="btn-primary" id="addKeywordBtn">+ Añadir Palabra Clave</button>
+                <h2><i class="fas fa-key"></i> Palabras Clave</h2>
+                <button class="btn-primary" id="addKeywordBtn">
+                    <i class="fas fa-plus"></i> Añadir Keyword
+                </button>
             </div>
-            
-            <div class="keywords-container">
-                <div class="keywords-list" id="keywordsList">
-                    <!-- Se llenará dinámicamente -->
-                </div>
-            </div>
+            <div class="keywords-modern" id="keywordsList"></div>
         </div>
 
-        <!-- Tab: En Duda -->
-        <div class="tab-content" id="dudas">
+        <!-- Tab: Buscar por Imagen -->
+        <div class="tab-content" id="buscar-imagen">
             <div class="section-header">
-                <h2>Páginas en Duda</h2>
-                <p class="subtitle">Empresas que necesitan revisión manual</p>
+                <h2><i class="fas fa-camera"></i> Búsqueda por Imagen (Google Lens)</h2>
+                <p class="subtitle">Sube una foto de un producto para encontrar empresas que lo vendan</p>
             </div>
-            
-            <div class="doubts-container" id="doubtsContainer">
-                <!-- Se llenará dinámicamente -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para editar empresa -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Editar Empresa</h2>
-            <form id="editForm">
-                <input type="hidden" id="editId">
-                
-                <label>Nombre de la Empresa:</label>
-                <input type="text" id="editName" required>
-                
-                <label>Sitio Web:</label>
-                <input type="url" id="editUrl" required>
-                
-                <label>Estado:</label>
-                <select id="editStatus">
-                    <option value="pending">⏳ Pendiente de revisar</option>
-                    <option value="captured">✅ Captado</option>
-                    <option value="my-client">👤 Mi Cliente</option>
-                    <option value="colleague-client">👥 Cliente de Compañero</option>
-                    <option value="in-progress">🔄 En Proceso</option>
-                </select>
-                
-                <label>Productos (separados por coma):</label>
-                <input type="text" id="editProducts" placeholder="osmosis inversa, descalcificador, etc.">
-                
-                <label>Notas:</label>
-                <textarea id="editNotes" rows="3"></textarea>
-                
-                <div class="modal-actions">
-                    <button type="submit" class="btn-primary">Guardar</button>
-                    <button type="button" class="btn-secondary" id="cancelEdit">Cancelar</button>
+            <div class="image-search-container">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Arrastra una imagen aquí o haz click para seleccionar</p>
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <button class="btn-primary" onclick="document.getElementById('imageInput').click()">
+                        <i class="fas fa-upload"></i> Seleccionar Imagen
+                    </button>
                 </div>
-            </form>
+                <div class="image-results" id="imageResults"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Modal para añadir palabra clave -->
+    <!-- Modal para Keywords -->
     <div id="keywordModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Añadir Palabra Clave</h2>
+            <h2><i class="fas fa-key"></i> Añadir Palabra Clave</h2>
             <form id="keywordForm">
-                <label>Palabra o Frase Clave:</label>
+                <label>Palabra o Frase:</label>
                 <input type="text" id="newKeyword" required placeholder="Ej: osmosis inversa">
                 
-                <label>Categoría (opcional):</label>
+                <label>Categoría:</label>
                 <select id="keywordCategory">
                     <option value="general">General</option>
                     <option value="producto">Producto</option>
@@ -177,28 +182,19 @@
         </div>
     </div>
 
-    <!-- Modal para añadir producto -->
-    <div id="productModal" class="modal">
+    <!-- Modal para Notas -->
+    <div id="notesModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Añadir Producto</h2>
-            <form id="productForm">
-                <label>Nombre del Producto:</label>
-                <input type="text" id="newProduct" required placeholder="Ej: Descalcificador FC-1300">
-                
-                <label>Categoría:</label>
-                <select id="productCategory">
-                    <option value="osmosis">Osmosis Inversa</option>
-                    <option value="descalcificador">Descalcificador</option>
-                    <option value="purificador">Purificador</option>
-                    <option value="dispensador">Dispensador</option>
-                    <option value="fuente">Fuente de Agua</option>
-                    <option value="otro">Otro</option>
-                </select>
+            <h2><i class="fas fa-sticky-note"></i> Añadir Nota</h2>
+            <form id="notesForm">
+                <input type="hidden" id="notesCompanyId">
+                <label>Nota:</label>
+                <textarea id="notesText" rows="5" placeholder="Escribe tus notas aquí..."></textarea>
                 
                 <div class="modal-actions">
-                    <button type="submit" class="btn-primary">Añadir</button>
-                    <button type="button" class="btn-secondary" id="cancelProduct">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                    <button type="button" class="btn-secondary" id="cancelNotes">Cancelar</button>
                 </div>
             </form>
         </div>

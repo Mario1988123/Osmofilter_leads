@@ -1,120 +1,215 @@
-# 🔍 Osmofilter CRM Leads
+# 🔍 Osmofilter CRM Leads V2.0
 
-Sistema automático de búsqueda y gestión de empresas del sector de tratamiento de agua.
+## 🎉 ¡VERSIÓN MEJORADA!
 
-## ✨ Características
-
-- 📋 **Panel web completo** para gestión de empresas
-- 🔍 **Búsqueda automática diaria** en Google
-- ✅ **Sistema de estados** (Captado, Mi Cliente, Cliente Compañero, En Proceso)
-- 🛠️ **Detección de productos** vendidos por cada empresa
-- 🎯 **Gestión de palabras clave** personalizables
-- ❓ **Sistema de revisión** para páginas dudosas
-- 📊 **Estadísticas** en tiempo real
-
-## 🚀 Configuración Inicial
-
-### Paso 1: Configurar Secrets en GitHub
-
-1. Ve a tu repositorio en GitHub
-2. Click en **Settings** (arriba a la derecha)
-3. En el menú lateral → **Secrets and variables** → **Actions**
-4. Click en **New repository secret**
-5. Añade estos 2 secrets:
-
-**Secret 1:**
-- Name: `GOOGLE_API_KEY`
-- Value: `AIzaSyCD0ZYbTzL-0jJmafElcnD20TiG4bnQl7I`
-
-**Secret 2:**
-- Name: `SEARCH_ENGINE_ID`
-- Value: `355217cd922dc41ac`
-
-### Paso 2: Activar GitHub Pages
-
-1. En tu repositorio → **Settings** → **Pages**
-2. En **Source** selecciona: **Deploy from a branch**
-3. En **Branch** selecciona: **main** y carpeta **/ (root)**
-4. Click en **Save**
-5. Espera 1-2 minutos
-
-### Paso 3: Acceder al Panel
-
-Tu panel estará disponible en:
-```
-https://TU-USUARIO.github.io/osmofilter-crm-leads/
-```
-
-## 📅 Búsqueda Automática
-
-- **Se ejecuta automáticamente** todos los días a las 9:00 AM
-- Busca empresas usando las palabras clave configuradas
-- Añade empresas nuevas automáticamente
-- Páginas dudosas van a revisión manual
-
-### Ejecutar búsqueda manualmente
-
-1. Ve a tu repositorio en GitHub
-2. Click en la pestaña **Actions**
-3. En el lateral izquierdo, click en **Búsqueda Diaria de Empresas**
-4. Click en **Run workflow** (botón gris a la derecha)
-5. Click en el botón verde **Run workflow**
-6. Espera 1-2 minutos y refresca la página del panel
-
-## 📖 Cómo Usar el Panel
-
-### 📋 Empresas
-- **Filtrar** por estado, producto o búsqueda
-- **Editar** empresas para cambiar estado, añadir productos, notas
-- **Eliminar** empresas que no sean relevantes
-
-### 🛠️ Productos
-- **Añadir** productos que detectes en las empresas
-- Ver cuántas empresas venden cada producto
-- **Filtrar** empresas por producto
-
-### 🔍 Palabras Clave
-- **Añadir** nuevas palabras clave para futuras búsquedas
-- Ver cuántos resultados ha encontrado cada palabra
-- **Eliminar** keywords que no sean útiles
-
-### ❓ En Duda
-- **Revisar** páginas que el sistema no pudo clasificar
-- **Añadir** a empresas o **Descartar**
-
-## 🎯 Estados de Empresas
-
-- ⏳ **Pendiente**: Recién encontrada, sin revisar
-- ✅ **Captado**: Empresa identificada como potencial cliente
-- 👤 **Mi Cliente**: Tu cliente personal
-- 👥 **Cliente Compañero**: Cliente de otro comercial
-- 🔄 **En Proceso**: Negociación en curso
-
-## 🔧 Personalización
-
-### Añadir más palabras clave
-Edita el archivo `data/keywords.json` o usa el panel web.
-
-### Modificar frecuencia de búsqueda
-Edita `.github/workflows/daily-search.yml` línea 5:
-```yaml
-- cron: '0 8 * * *'  # Cambiar hora aquí (formato: minuto hora * * *)
-```
-
-## 📊 Archivos de Datos
-
-- `data/companies.json` - Base de datos de empresas
-- `data/keywords.json` - Palabras clave de búsqueda
-- `data/products.json` - Productos detectados
-- `data/doubts.json` - Páginas pendientes de revisión
-
-## 🆘 Soporte
-
-Si necesitas ayuda:
-1. Verifica que los Secrets estén configurados correctamente
-2. Revisa los logs en GitHub Actions para ver errores
-3. Asegúrate de que GitHub Pages esté activado
+Sistema completo de gestión de leads con diseño moderno y funcionalidades avanzadas.
 
 ---
 
-**Creado para Osmofilter** 🚰💧
+## ✨ NUEVAS CARACTERÍSTICAS V2.0
+
+### 🎯 **1. Filtros Mejorados**
+- ✅ **Excluye marketplaces** (Amazon, AliExpress, Leroy Merlin, etc.)
+- ✅ **Excluye YouTube y redes sociales**
+- ✅ **Solo dominio principal** - No duplica subdominios ni carpetas
+- ✅ **Sistema de descartados** - Empresas eliminadas no se vuelven a buscar
+
+### 🚀 **2. UI Moderna y Ágil**
+- ✅ **Cambio de estado con 1 click** - Sin modales, directo en el dropdown
+- ✅ **Pestañas separadas** por estado:
+  - Pendientes
+  - Mis Clientes
+  - Clientes de Compañero
+  - En Proceso
+  - Captados
+- ✅ **Diseño moderno** con gradientes y animaciones
+- ✅ **Notificaciones** visuales de acciones
+
+### 📊 **3. Información de Contacto**
+- ✅ **Email** extraído automáticamente
+- ✅ **Teléfono** detectado en la web
+- ✅ **CIF** encontrado si está disponible
+- ✅ **Todo sin coste adicional** - scraping básico
+
+### 📝 **4. Sistema de Notas**
+- ✅ Añadir notas a cada empresa
+- ✅ Visible en la tarjeta de empresa
+- ✅ Editar notas en cualquier momento
+
+### 🔍 **5. Análisis de Keywords**
+- ✅ Detecta palabras clave de las empresas encontradas
+- ✅ Sugiere nuevas keywords para buscar
+- ✅ Productos detectados automáticamente
+
+### 📸 **6. Búsqueda por Imagen**
+- ✅ Interfaz preparada para Google Vision API
+- ✅ Subir foto de producto
+- ✅ Encontrar empresas que lo venden
+
+### 💪 **7. Mejoras Técnicas**
+- ✅ Solo 5 resultados por keyword (50 búsquedas/día vs 100)
+- ✅ Extracción inteligente de información
+- ✅ Base de datos de descartados
+- ✅ Rendimiento optimizado
+
+---
+
+## 🎨 DISEÑO
+
+### Antes (V1.0):
+- Tabla simple
+- Sin animaciones
+- Edición con modal
+- Todo junto
+
+### Ahora (V2.0):
+- ✅ Cards modernas con gradientes
+- ✅ Animaciones suaves
+- ✅ Cambio rápido de estado
+- ✅ Organizado por pestañas
+- ✅ Estadísticas visuales
+- ✅ Responsive total
+
+---
+
+## 📦 INSTALACIÓN
+
+### Si ya tienes V1.0 instalada:
+
+```bash
+cd C:\Users\Osmofilter\Documents\Osmofilter_leads
+```
+
+Elimina todo el contenido EXCEPTO la carpeta `.git`
+
+Copia los nuevos archivos de V2.0
+
+```bash
+git add .
+git commit -m "Actualización a V2.0"
+git push origin main
+```
+
+### Instalación nueva:
+
+Sigue las instrucciones del archivo `SETUP.md`
+
+---
+
+## 🔐 CREDENCIALES
+
+Las mismas que en V1.0:
+- API Key: `AIzaSyCD0ZYbTzL-0jJmafElcnD20TiG4bnQl7I`
+- Search Engine ID: `355217cd922dc41ac`
+
+---
+
+## 🎯 CÓMO USAR
+
+### Flujo de Trabajo:
+
+1. **Búsqueda automática diaria** a las 9:00 AM
+2. **Revisa "Pendientes"** - Empresas nuevas encontradas
+3. **Cambia el estado** con 1 click en el dropdown
+4. **Añade notas** si es necesario
+5. **Descarta** empresas no relevantes (no volverán a aparecer)
+6. **Las empresas se mueven** automáticamente a su pestaña
+
+### Estados:
+
+- ⏳ **Pendiente**: Recién encontrada, sin revisar
+- ✅ **Captado**: Empresa identificada como potencial
+- 👤 **Mi Cliente**: Tu cliente personal
+- 👥 **Cliente Compañero**: Cliente de otro comercial
+- 🔄 **En Proceso**: Negociación activa
+
+---
+
+## 🗑️ SISTEMA DE DESCARTADOS
+
+Cuando eliminas una empresa:
+- Se guarda en `discarded.json`
+- **No volverá a aparecer** en futuras búsquedas
+- Evita duplicados automáticamente
+- Dominio completo bloqueado
+
+---
+
+## 📊 DATOS EXTRAÍDOS
+
+Para cada empresa intenta obtener:
+- ✅ Nombre
+- ✅ URL (dominio principal)
+- ✅ Email de contacto
+- ✅ Teléfono
+- ✅ CIF (si está en aviso legal)
+- ✅ Productos/Keywords detectados
+- ✅ Snippet de descripción
+
+---
+
+## 🔧 PERSONALIZACIÓN
+
+### Añadir Keywords:
+- Ve a pestaña "Keywords"
+- Click en "+ Añadir Keyword"
+- Se usará en la próxima búsqueda
+
+### Cambiar frecuencia:
+Edita `.github/workflows/daily-search.yml` línea 5
+
+---
+
+## 🚀 RENDIMIENTO
+
+- **50 búsquedas/día** (vs 100 en V1.0)
+- **Más precisión** en resultados
+- **Menos descartados** gracias a filtros
+- **0€ gastados** - todo dentro del límite gratis
+
+---
+
+## 📱 RESPONSIVE
+
+- ✅ Funciona en móvil
+- ✅ Funciona en tablet
+- ✅ Funciona en PC
+- ✅ Diseño adaptativo
+
+---
+
+## 🔒 SEGURIDAD
+
+- ✅ API Keys en Secrets de GitHub
+- ✅ No se exponen en el código
+- ✅ Repositorio puede ser público (sin riesgo)
+- ✅ Límites de Google Cloud configurados
+
+---
+
+## ⚡ PRÓXIMAS MEJORAS POSIBLES
+
+- Integración con Google Vision API completa
+- Exportar a Excel/CSV
+- Envío de emails desde el panel
+- Integración con tu CRM actual
+- Análisis de competencia avanzado
+- Gráficas y estadísticas
+
+---
+
+## 🆘 SOPORTE
+
+Si algo no funciona:
+1. Verifica GitHub Actions (debe estar verde ✅)
+2. Comprueba que los Secrets estén configurados
+3. Revisa la consola del navegador (F12)
+4. Lee los logs de GitHub Actions
+
+---
+
+**Creado con ❤️ para Osmofilter** 🚰💧
+
+**Versión:** 2.0  
+**Fecha:** Diciembre 2025  
+**Autor:** Sistema automatizado de gestión de leads
