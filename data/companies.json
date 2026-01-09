@@ -554,5 +554,44 @@
     "foundBy": "hidrosalud",
     "snippet": "18 dic 2025 ... Carbono Sedimentos Postfiltro Kit Filtros Osmosis Inversa 50GPD + Membrana - Compatible Hidrobox, Hidrosalud - Depurtek Filtros Agua Depurtek.",
     "notes": ""
+  },
+  {
+    "id": "1767947149922",
+    "name": "Purificador de agua - Filtro de agua para grifo - Boutique LAVIE",
+    "url": "https://lavie.bio/es/tienda/",
+    "domain": "lavie.bio",
+    "status": "pending",
+    "products": [
+      "purificador",
+      "filtro",
+      "agua"
+    ],
+    "email": "contact@lavie.bio",
+    "phone": "",
+    "cif": null,
+    "socialName": null,
+    "foundDate": "2026-01-09T08:25:49.922528",
+    "foundBy": "purificador agua",
+    "snippet": "22 ago 2025 ... La jarra con filtro UV-A LaVie destaca por su tecnología patentada, natural y sin filtros: purifica el agua del grifo en pocos minutos mediante radiación UV-A, ...",
+    "notes": ""
+  },
+  {
+    "id": "1767947155634",
+    "name": "Hidrotec Tratamiento de Aguas",
+    "url": "https://www.hidrotec.es/",
+    "domain": "hidrotec.es",
+    "status": "pending",
+    "products": [
+      "tratamiento",
+      "agua"
+    ],
+    "email": "info@hidrotec.es",
+    "phone": "",
+    "cif": "B30759187",
+    "socialName": null,
+    "foundDate": "2026-01-09T08:25:55.634182",
+    "foundBy": "tratamiento de agua",
+    "snippet": "10 jul 2025 ... Hidrotec Tratamiento de Aguas ha simplificado la tecnología de eliminacion de boro del agua por medio de las plantas de tratamiento tipo HEB. Aunque el ...",
+    "notes": ""
   }
 ]
